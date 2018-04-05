@@ -2,17 +2,17 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -45,44 +45,39 @@ var player2Pick = getPrizeCard(deckOfPlayer2);
 var prizeCard = getPrizeCard(deckOfPrize);
 
 var scoreBoard = {
-    "p1": 0,
-    "p2": 0
+  "p1": 0,
+  "p2": 0
 }
 
 function getPrizeCard(arrayOfCards) {
-    var shuffledCards = shuffleCard(arrayOfCards);
-    let prize = shuffledCards.pop();
-    return prize;
+  var shuffledCards = shuffleCard(arrayOfCards);
+  let prize = shuffledCards.pop();
+  return prize;
 }
 
 function shuffleCard(arrayOfCards) {
-    for (let i = 0; i < arrayOfCards.length - 1; i++) {
-        const j = Math.floor(Math.random() * (arrayOfCards.length - 1) + 1);
-        [arrayOfCards[i], arrayOfCards[j]] = [arrayOfCards[j], arrayOfCards[i]];
-    }
-    return arrayOfCards;
+  for (let i = 0; i < arrayOfCards.length - 1; i++) {
+    const j = Math.floor(Math.random() * (arrayOfCards.length - 1) + 1);
+    [arrayOfCards[i], arrayOfCards[j]] = [arrayOfCards[j], arrayOfCards[i]];
+  }
+  return arrayOfCards;
 }
 
-// function selectCardToBet(arrayOfCards, pick) {
-//     let index = arrayOfCards.indexOf(pick);
-
-//     if (index > -1) {
-//         arrayOfCards.splice(index, 1);
-
-//     }
-//     return arrayOfCards;
-// }
+function selectCardToBet(arrayOfCards, pick) {
+  let selectedCard = Number(arrayOfCards[pick - 1]);
+  return selectedCard;
+}
 
 function updatescoreBoard(p1, p2) {
-    if (p1 > p2) {
-        scoreBoard["p1"] += prizeCard;
-    } else if (p1 < p2) {
-        scoreBoard["p2"] += prizeCard;
-    } else {
-        scoreBoard["p1"] += (prizeCard / 2);
-        scoreBoard["p2"] += (prizeCard / 2);
-    }
-    return scoreBoard;
+  if (p1 > p2) {
+    scoreBoard["p1"] += prizeCard;
+  } else if (p1 < p2) {
+    scoreBoard["p2"] += prizeCard;
+  } else {
+    scoreBoard["p1"] += (prizeCard / 2);
+    scoreBoard["p2"] += (prizeCard / 2);
+  }
+  return scoreBoard;
 }
 
 scoreBoard = updatescoreBoard(player1Pick, player2Pick);
@@ -91,7 +86,7 @@ console.log(`The prize is: ${prizeCard}`);
 console.log(`Player1 selected: ${player1Pick} score ${scoreBoard["p1"]}`);
 console.log(`Player2 selected: ${player2Pick} score ${scoreBoard["p2"]}`);
 
-console.log(scoreBoard);
+
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
