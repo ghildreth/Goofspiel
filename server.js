@@ -35,12 +35,81 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+const deckOfPrize = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const deckOfPlayer1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const deckOfPlayer2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+var player1Pick = getPrizeCard(deckOfPlayer1);
+var player2Pick = getPrizeCard(deckOfPlayer2);
+
+var prizeCard = getPrizeCard(deckOfPrize);
+
+var scoreBoard = {
+    "p1": 0,
+    "p2": 0
+}
+
+function getPrizeCard(arrayOfCards) {
+    var shuffledCards = shuffleCard(arrayOfCards);
+    let prize = shuffledCards.pop();
+    return prize;
+}
+
+function shuffleCard(arrayOfCards) {
+    for (let i = 0; i < arrayOfCards.length - 1; i++) {
+        const j = Math.floor(Math.random() * (arrayOfCards.length - 1) + 1);
+        [arrayOfCards[i], arrayOfCards[j]] = [arrayOfCards[j], arrayOfCards[i]];
+    }
+    return arrayOfCards;
+}
+
+// function selectCardToBet(arrayOfCards, pick) {
+//     let index = arrayOfCards.indexOf(pick);
+
+//     if (index > -1) {
+//         arrayOfCards.splice(index, 1);
+
+//     }
+//     return arrayOfCards;
+// }
+
+function updatescoreBoard(p1, p2) {
+    if (p1 > p2) {
+        scoreBoard["p1"] += prizeCard;
+    } else if (p1 < p2) {
+        scoreBoard["p2"] += prizeCard;
+    } else {
+        scoreBoard["p1"] += (prizeCard / 2);
+        scoreBoard["p2"] += (prizeCard / 2);
+    }
+    return scoreBoard;
+}
+
+scoreBoard = updatescoreBoard(player1Pick, player2Pick);
+
+console.log(`The prize is: ${prizeCard}`);
+console.log(`Player1 selected: ${player1Pick} score ${scoreBoard["p1"]}`);
+console.log(`Player2 selected: ${player2Pick} score ${scoreBoard["p2"]}`);
+
+console.log(scoreBoard);
+
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
 // Home page
+
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("game_homepage");
+});
+
+app.get("/game_new", (req, res) => {
+  res.render("game_new");
+});
+
+app.get("/game_play", (req, res) => {
+
+
+  res.render("game_play");
 });
 
 app.listen(PORT, () => {
