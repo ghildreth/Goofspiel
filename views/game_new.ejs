@@ -5,13 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Goofspiel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <!-- <script src="app.js"></script> -->
 </head>
 <body>
-    <h3>You picked (INSERT PICKED GAME HERE), great choice!</h3>
-    <p>Your opponent is: (INSERT RANDOMLY ASSIGNED BOT)</p>
-    <p>Click here to start you game </p>
-
+    
+    <form method="POST" action="/game/<%= gameId %>/play">
+    <% game.hand1.forEach(function(card) { %>
+        <button type="sumbit" name="card" value="<%= card %>">
+            <img width="6%" src="/cards/<%= card %>.png" />
+        </button>
+    <% }) %>
+    </form>
+    
+    <pre><%= JSON.stringify(game, null, 2) %></pre>
 </body>
 </html>
