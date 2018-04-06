@@ -75,7 +75,7 @@ app.use(express.static("public"));
 
 const state = {
   games: {
-    
+
   }
 }
 
@@ -99,7 +99,7 @@ function getSuitedCards(suit) {
 }
 
 function getValueOf(card) {
-  const value = card.split('_')[0]; // 
+  const value = card.split('_')[0]; //
 
   // console.log(`getValueOf(${card}) => ${value}`);
   switch(value) {
@@ -135,7 +135,7 @@ app.get('/game/:gameId', (req, res) => {
     res.redirect('/');
     return;
   }
-
+  console.log(game.hand2);
   res.render('game_new', { game, gameId });
 });
 
@@ -172,7 +172,7 @@ app.post('/game/:gameId/play', (req, res) => {
     return;
   }
 
-  const opponentBet = drawCard(game.hand2); // reduces the Bots array of cards by 1 and gives one bet card 
+  const opponentBet = drawCard(game.hand2); // reduces the Bots array of cards by 1 and gives one bet card
   game.hand1 = game.hand1.filter(x=> x != card);
   game.bet1 = card;
   game.bet2 = opponentBet;

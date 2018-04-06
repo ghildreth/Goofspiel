@@ -5,18 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Goofspiel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/sytles/layout.css" type="text/css"/>
     <!-- <script src="app.js"></script> -->
 </head>
 <body>
-    
+      <!-- <form method="POST" action="/game/<%= gameId %>/play"> -->
+    <% game.hand2.forEach(function(card) { %>
+        <span type="sumbit" name="card" value="<%= card %>">
+            <img width="6%" src="/cards/<%= card %>.png" />
+        </span>
+    <% }) %>
+ <!--    </form> -->
+
     <form method="POST" action="/game/<%= gameId %>/play">
     <% game.hand1.forEach(function(card) { %>
-        <button type="sumbit" name="card" value="<%= card %>">
-            <img width="6%" src="/cards/<%= card %>.png" />
-        </button>
+    <span>
+        <input type="image" src="/cards/<%= card %>.png" name="card" class="user_cards" value="<%= card %>">
+<!--             <img width="6%" src="/cards/<%= card %>.png" /> -->
+       <!--  </button> -->
     <% }) %>
     </form>
-    
+
     <pre><%= JSON.stringify(game, null, 2) %></pre>
 </body>
 </html>
