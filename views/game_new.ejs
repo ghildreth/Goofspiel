@@ -5,27 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Goofspiel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/sytles/layout.css" type="text/css"/>
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
     <!-- <script src="app.js"></script> -->
 </head>
 <body>
-      <!-- <form method="POST" action="/game/<%= gameId %>/play"> -->
-    <% game.hand2.forEach(function(card) { %>
-        <span type="sumbit" name="card" value="<%= card %>">
-            <img width="6%" src="/cards/<%= card %>.png" />
-        </span>
-    <% }) %>
- <!--    </form> -->
+    <div class=cardContainer>
+        <div class=player1Cards>
+        <p>Player 1:</p>
+            <% game.hand2.forEach(function(card) { %>
+                <span type="sumbit" name="card" value="<%= card %>">
+                    <img class="cardsDisplay" src="/cards/<%= card %>.png" />
+                </span>
+            <% }) %>
+        </div>
+ 
+        <div class=player2Cards>
+        <p>Player 2:</p>
+            <form method="POST" action="/game/<%= gameId %>/play">
+            <% game.hand1.forEach(function(card) { %>
+            <span>
+                <input type="image" src="/cards/<%= card %>.png" name="card" class="cardsDisplay" value="<%= card %>">
+            <% }) %>
+            </form>
+        </div>
+    </div>
 
-    <form method="POST" action="/game/<%= gameId %>/play">
-    <% game.hand1.forEach(function(card) { %>
-    <span>
-        <input type="image" src="/cards/<%= card %>.png" name="card" class="user_cards" value="<%= card %>">
-<!--             <img width="6%" src="/cards/<%= card %>.png" /> -->
-       <!--  </button> -->
-    <% }) %>
-    </form>
-
-    <pre><%= JSON.stringify(game, null, 2) %></pre>
+   <!-- <pre><%= JSON.stringify(game, null, 2) %></pre> -->
 </body>
 </html>

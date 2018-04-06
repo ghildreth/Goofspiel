@@ -35,43 +35,6 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// const deckOfPrize = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-// const deckOfPlayer1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-// const deckOfPlayer2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-
-// var player1Pick = drawCard(deckOfPlayer1);
-// var player2Pick = drawCard(deckOfPlayer2);
-
-// var prizeCard = drawCard(deckOfPrize);
-
-// var scoreBoard = {
-//   "p1": 0,
-//   "p2": 0
-// }
-
-// function selectCardToBet(arrayOfCards, pick) {
-//   let selectedCard = Number(arrayOfCards[pick - 1]);
-//   return selectedCard;
-// }
-
-// function updatescoreBoard(p1, p2) {
-//   if (p1 > p2) {
-//     scoreBoard["p1"] += prizeCard;
-//   } else if (p1 < p2) {
-//     scoreBoard["p2"] += prizeCard;
-//   } else {
-//     scoreBoard["p1"] += (prizeCard / 2);
-//     scoreBoard["p2"] += (prizeCard / 2);
-//   }
-//   return scoreBoard;
-// }
-
-// scoreBoard = updatescoreBoard(player1Pick, player2Pick);
-
-// console.log(`The prize is: ${prizeCard}`);
-// console.log(`Player1 selected: ${player1Pick} score ${scoreBoard["p1"]}`);
-// console.log(`Player2 selected: ${player2Pick} score ${scoreBoard["p2"]}`);
-
 
 const state = {
   games: {
@@ -143,7 +106,10 @@ app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
 
   const pile = shuffleCard(getSuitedCards('hearts'));
-  const valueCard = pile.pop();  // at this point PILE has only 12 cards left!!!
+  const valueCard = pile[pile.length];  // at this point PILE has only 12 cards left!!!
+  console.log('valueCard where we had a POP earlier', valueCard);
+  console.log('pile where we had a POP earlier', pile);
+  console.log('pile where we had a POP earlier', pile.length);
 
   state.games[gameId] = {
     hand1: getSuitedCards('spades'), // ['ace_of_spades', '', ....]
@@ -173,11 +139,13 @@ app.post('/game/:gameId/play', (req, res) => {
   }
 
   const opponentBet = drawCard(game.hand2); // reduces the Bots array of cards by 1 and gives one bet card
-  game.hand1 = game.hand1.filter(x=> x != card);
-  game.bet1 = card;
-  game.bet2 = opponentBet;
-  game.valueCard = game.pile.pop();
-  console.log(`ValueCard: ${game.valueCard}`);
+  console.log("Opponent Bet:", opponentBet);
+  game.hand1 = game.hand1.filter(x=> x != card); // [array of our cards]
+  game.bet1 = card; // specific card WE clicked
+  game.bet2 = opponentBet; // specific card the BOT  picked
+  console.log("game.valueCard - BEFORE",game.valueCard);
+  game.valueCard = game.pile.pop(); 
+  console.log("game.valueCard",game.valueCard);
 
   if(getValueOf(game.bet1) > getValueOf(game.bet2)) {
     // console.log(`Player 1 wins with ${getValueOf(game.valueCard)} with ${card} vs ${opponentBet}`);
