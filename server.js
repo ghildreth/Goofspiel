@@ -98,7 +98,7 @@ app.get('/game/:gameId', (req, res) => {
     res.redirect('/');
     return;
   }
-  console.log(game.hand2);
+  console.log("inside my app.get /game/:gameId:", game);
   res.render('game_new', { game, gameId });
 });
 
