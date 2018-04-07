@@ -13,14 +13,14 @@
         <p class="playerNames">Bot Dave: &#x1F916;</p>
             <% game.hand2.forEach(function(card) { %>
                 <span type="sumbit" name="card" value="<%= card %>">
-                    <img class="cardsDisplay" src="/cards/<%= card %>.png" />
+                    <img class="cardsDisplay" src="/cards/backside.png" />
                 </span>
             <% }) %>
         </div><br />
 
             <div class=pileCards>
                     <span>
-                        <p>The Prize &#x2B07;</p>
+                        <p class="playerNames">The Prize &#x2B07;</p>
                         <img class="cardsDisplay" src="/cards/<%= game.valueCard %>.png">
                     </span>
             </div>
@@ -28,7 +28,7 @@
 
         <div class=player2Cards>
             <form method="POST" action="/game/<%= gameId %>/play">
-            <p class="playerNames">Human: &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
+            <p class="playerNames">Hooooman: &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
                 <% game.hand1.forEach(function(card) { %>
                 <span>
                     <input type="image" src="/cards/<%= card %>.png" name="card" class="cardsDisplay" value="<%= card %>">
