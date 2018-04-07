@@ -18,7 +18,7 @@
                 </span>
             <% }) %>
         </div>
- 
+
         <div class=player2Cards>
         <p>Player 2:</p>
             <form method="POST" action="/game/<%= gameId %>/play">
@@ -30,6 +30,26 @@
         </div>
     </div>
 
-   <!-- <pre><%= JSON.stringify(game, null, 2) %></pre> -->
+   <pre><%= JSON.stringify(game, null, 2) %></pre>
+
+     <div class="scoreBoard"><h6>Player 1 Score: <%= game.score1 %> </h6>
+     <h6>Player 2 Score: <%= game.score2 %> </h6>
+
+         <% if (game.over === true)  { %>
+            <% if (game.score1 > game.score2){ %>
+          <div><h6>player 1 wins</h6>
+              <form method="post" action="/game/new">
+                <button type="submit">Play again?</button>
+              </form>
+            </div>
+            <% } else {%>
+         <div><h6>player 2 wins</h6>
+              <form method="post" action="/game/new">
+                <button type="submit">Play again?</button>
+              </form>
+         </div>
+            <% }%>
+          <% }%>
+      </div>
 </body>
 </html>

@@ -4,22 +4,51 @@ body {
     display: block;
 
     .player1Cards {
-      
-     
+
+
     }
 
     .player1Cards {
-      
-    
+
+
     }
 
   }
   .cardsDisplay {
-    width: 10%;
+    width: 161px;
   }
 
-} 
+}
 
 
- 
+ span {}
 
+.player2Cards span {
+    position: absolute;
+    top: 0;
+    left: 50px;
+}
+
+.player2Cards {
+    position: relative;
+    height: 242px;
+}
+
+.player1Cards span {
+    width: 50px;
+    overflow: visible;
+    display: inline-block;
+}
+
+
+
+div.scoreBoard {
+    position: absolute;
+    top: 300;
+    right: 100;
+    width: 300;
+    height: 300px;
+    padding-left: 29px;
+    border: 3px solid #73AD21;
+    font-size: 3em;
+}
