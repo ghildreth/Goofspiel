@@ -143,7 +143,7 @@ app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
 
   const pile = shuffleCard(getSuitedCards('hearts'));
-  const valueCard = pile.pop();  // at this point PILE has only 12 cards left!!!
+  var valueCard = pile.pop();  // at this point PILE has only 12 cards left!!!
 
   state.games[gameId] = {
     hand1: getSuitedCards('spades'), // ['ace_of_spades', '', ....]
@@ -176,18 +176,23 @@ app.post('/game/:gameId/play', (req, res) => {
   game.hand1 = game.hand1.filter(x=> x != card);
   game.bet1 = card;
   game.bet2 = opponentBet;
-  game.valueCard = game.pile.pop();
   console.log(`ValueCard: ${game.valueCard}`);
-
-  if(getValueOf(game.bet1) > getValueOf(game.bet2)) {
-    // console.log(`Player 1 wins with ${getValueOf(game.valueCard)} with ${card} vs ${opponentBet}`);
-    game.score1 += getValueOf(game.valueCard);
-  } else {
-    // console.log(`Player 2 wins with ${getValueOf(game.valueCard)} with ${opponentBet} vs ${card}`);
-    game.score2 += getValueOf(game.valueCard);
+  if(!game.over){
+    if(getValueOf(game.bet1) === getValueOf(game.bet2)) {
+      // console.log(`Player 1 wins with ${getValueOf(game.valueCard)} with ${card} vs ${opponentBet}`);
+      game.score1 += getValueOf(game.valueCard) / 2;
+      game.score2 += getValueOf(game.valueCard) / 2;
+    } else if (getValueOf(game.bet1) > getValueOf(game.bet2)){
+      // console.log(`Player 2 wins with ${getValueOf(game.valueCard)} with ${opponentBet} vs ${card}`);
+      game.score1 += getValueOf(game.valueCard);
+    } else if (getValueOf(game.bet2) > getValueOf(game.bet1)) {
+      game.score2 += getValueOf(game.valueCard);
+    }
+    game.valueCard = game.pile.pop();
+    game.over = !game.valueCard;
   }
+    res.redirect(`/game/${gameId}`);
 
-  res.redirect(`/game/${gameId}`);
 })
 
 
