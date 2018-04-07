@@ -8,8 +8,8 @@
     <!-- <script src="app.js"></script> -->
 </head>
 <body>
-    <div class=cardContainer>
-        <div class=player1Cards>
+    <div class="cardContainer">
+        <div class="player1Cards">
         <p class="playerNames">Bot Dave: &#x1F916;</p>
             <% game.hand2.forEach(function(card) { %>
                 <span type="sumbit" name="card" value="<%= card %>">
@@ -18,15 +18,15 @@
             <% }) %>
         </div><br />
 
-            <div class=pileCards>
+            <div class="pileCards">
                     <span>
-                        <p class="playerNames">The Prize &#x2B07;</p>
+                        <p class="playerNames">The Prize</p>
+                        <p class="playerNames">&#x2B07;</p>
                         <img class="cardsDisplay" src="/cards/<%= game.valueCard %>.png">
                     </span>
             </div>
 
-
-        <div class=player2Cards>
+        <div class="player2Cards">
             <form method="POST" action="/game/<%= gameId %>/play">
             <p class="playerNames">Hooooman: &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
                 <% game.hand1.forEach(function(card) { %>
@@ -44,6 +44,11 @@
 
          <% if (game.over === true)  { %>
           <div><p><%= game.winner %> wins!</p>
+            <% if (game.winner === "Bot")  { %>
+            <iframe src="https://giphy.com/embed/9MFsKQ8A6HCN2" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hehehe-hehehehe-9MFsKQ8A6HCN2"></a></p>
+            <% } else { %>
+                <iframe src="https://giphy.com/embed/l0HUnQR733uhm48UM" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ptm-l0HUnQR733uhm48UM"></a></p>
+                <% }%>
               <form method="post" action="/game/new">
                 <button type="submit">Play again?</button>
               </form>

@@ -19,13 +19,14 @@
     <h1>Welcome to NOGames!</h1>
 </header>
 <body>
-    <form method="post" action="/game/new">
-        <button type="submit">New Game</button>
-    </form>
-    <div>What game do you want to play?</div>
-    <ul>
-        <li>Goofspiel</li>
-        <li>BlackJack</li>
+    <h2>What game do you want to play?</h2>
+    <ul class="gameTypes">
+        <li>Goofspiel
+            <form method="post" action="/game/new">
+            <button type="submit">Start Game</button>
+            </form>
+        </li>
+
     </ul>
 
     <div>

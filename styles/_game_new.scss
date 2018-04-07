@@ -1,17 +1,26 @@
 .playerNames {
 font-size: 2em;
+margin: 0px;
 }
 
 .cardsDisplay {
     width: 70px;
     border: 1px solid black;
     box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 25px;
+  }
+
+  div.pileCards {
+    margin-bottom: 20px;
   }
 
 .scoreBoard {
     border: 3px solid rgb(218, 221, 21);
     font-size: 2em;
-    width: 75%;
+}
+
+.d-none {
+  visibility: hidden;
 }
 
 

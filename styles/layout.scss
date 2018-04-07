@@ -4,4 +4,17 @@ body {
   background-color: darkred;
   width: 100%;
   font-family: 'IBM Plex Mono', monospace;
+  text-align:center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+  ul.gameTypes {
+    list-style-type: none;
+  }
+
+  button {
+    border-radius: 7px;
+    height: 50px;
+  }
+
 }

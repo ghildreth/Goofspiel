@@ -72,9 +72,7 @@ function getValueOf(card) {
     case 'king': return 13;
     default: return Number(value);
   }
-} // there is something wrong with this i think !
-
-// --> ['ace_of_diamons', '2_of_diamonds', ....]
+}
 
 
 // Mount all resource routes
