@@ -138,7 +138,7 @@ app.post('/game/:gameId/play', (req, res) => {
   game.hand1 = game.hand1.filter(x=> x != card);
   game.bet1 = opponentBet;
   game.bet2 = card;
-  game.winner = "Human";
+  game.winner = game.username;
   if(!game.over){
     if(getValueOf(game.bet1) === getValueOf(game.bet2)) {
       // console.log(`Player 1 wins with ${getValueOf(game.valueCard)} with ${card} vs ${opponentBet}`);
@@ -154,7 +154,7 @@ app.post('/game/:gameId/play', (req, res) => {
     game.over = !game.valueCard;
   }
   if (game.score1 > game.score2) {
-      game.winner = "Bot";
+      game.winner = game.botname;
   }
 
   // stringify the objecty
@@ -164,9 +164,11 @@ app.post('/game/:gameId/play', (req, res) => {
 var temp = state.games;
 
 var winner;
+var username;
 console.log("temp");
 for(var key in temp){
   winner = temp[key].winner;
+  username = temp[key].username;
 }
 
 // state.games[key].score1,
@@ -175,8 +177,8 @@ for(var key in temp){
 if (game.over){
   knex('state').insert({
     // req.body.user_name
-    screen_name: 'rohit',
-    gameState: winner,
+    screen_name: game.winner,
+    gameState:  temp[key].score1 > temp[key].score2 ? temp[key].score1 : temp[key].score2,
   }).returning('id')
   .then((id)=>{
     console.log("Record inserted into the database");
