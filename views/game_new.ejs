@@ -28,12 +28,12 @@
 
         <div class="player2Cards">
             <form method="POST" action="/game/<%= gameId %>/play">
-            <p class="playerNames">Hooooman: &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
-                <% game.hand1.forEach(function(card) { %>
-                <span>
-                    <input type="image" src="/cards/<%= card %>.png" name="card" class="cardsDisplay" value="<%= card %>">
-                </span>
-            <% }) %>
+                <p class="playerNames"><%= game.username %> &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
+                    <% game.hand1.forEach(function(card) { %>
+                    <span>
+                        <input type="image" src="/cards/<%= card %>.png" name="card" class="cardsDisplay" value="<%= card %>">
+                    </span>
+                    <% }) %>
             </form>
         </div>
     </div>
