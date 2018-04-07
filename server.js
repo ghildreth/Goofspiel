@@ -35,43 +35,6 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// const deckOfPrize = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-// const deckOfPlayer1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-// const deckOfPlayer2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-
-// var player1Pick = drawCard(deckOfPlayer1);
-// var player2Pick = drawCard(deckOfPlayer2);
-
-// var prizeCard = drawCard(deckOfPrize);
-
-// var scoreBoard = {
-//   "p1": 0,
-//   "p2": 0
-// }
-
-// function selectCardToBet(arrayOfCards, pick) {
-//   let selectedCard = Number(arrayOfCards[pick - 1]);
-//   return selectedCard;
-// }
-
-// function updatescoreBoard(p1, p2) {
-//   if (p1 > p2) {
-//     scoreBoard["p1"] += prizeCard;
-//   } else if (p1 < p2) {
-//     scoreBoard["p2"] += prizeCard;
-//   } else {
-//     scoreBoard["p1"] += (prizeCard / 2);
-//     scoreBoard["p2"] += (prizeCard / 2);
-//   }
-//   return scoreBoard;
-// }
-
-// scoreBoard = updatescoreBoard(player1Pick, player2Pick);
-
-// console.log(`The prize is: ${prizeCard}`);
-// console.log(`Player1 selected: ${player1Pick} score ${scoreBoard["p1"]}`);
-// console.log(`Player2 selected: ${player2Pick} score ${scoreBoard["p2"]}`);
-
 
 const state = {
   games: {
@@ -143,8 +106,8 @@ app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
 
   const pile = shuffleCard(getSuitedCards('hearts'));
-  var valueCard = pile.pop();  // at this point PILE has only 12 cards left!!!
 
+  var valueCard = pile.pop();  // at this point PILE has only 12 cards left!!!
   state.games[gameId] = {
     hand1: getSuitedCards('spades'), // ['ace_of_spades', '', ....]
     hand2: getSuitedCards('diamonds'),
@@ -190,6 +153,7 @@ app.post('/game/:gameId/play', (req, res) => {
     }
     game.valueCard = game.pile.pop();
     game.over = !game.valueCard;
+
   }
     res.redirect(`/game/${gameId}`);
 
