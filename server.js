@@ -40,7 +40,9 @@ const state = {
   games: {
 
   }
-}
+};
+
+const bots = ['Julius Ceasar', 'Mickey', 'Dave', 'Homer Simpson'];
 
 function drawCard(arrayOfCards) {
   var shuffledCards = shuffleCard(arrayOfCards);
@@ -114,6 +116,7 @@ app.post("/game/new", (req, res) => {
     bet2: null,
     score1: 0,
     score2: 0,
+    username: req.body.username,
   }
 
   res.redirect(`/game/${gameId}`);
@@ -184,8 +187,6 @@ if (game.over){
 
 res.redirect(`/game/${gameId}`);
 });
-
-
 
 
 
