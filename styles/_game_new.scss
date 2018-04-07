@@ -1,24 +1,57 @@
 body {
-
   .cardContainer {
     display: block;
+ 
+    .player1Cards span {
+      width: 50px;
+      overflow: visible;
+      display: inline-block;
 
-    .player1Cards {
-      
-     
+      .player1Cards {
+        position: relative;
+        height: 242px;
+      }
     }
 
-    .player1Cards {
-      
-    
+    div.pileCards {
+      position: relative;
+      height: 242px;
+    }
+    .pileCards span {
+      position: absolute;
+      top: 0px;
+      left: 50px;
+
+      .pileCards {
+        position: relative;
+        height: 242px;
+      }
     }
 
-  }
-  .cardsDisplay {
-    width: 10%;
-  }
+    div.player2Cards {
+      position: relative;
+    }
+  
+    .player2Cards span {
+      width: 50px;
+      overflow: visible;
+      display: inline-block;
 
-} 
+      .player2Cards {
+        position: relative;
+        height: 242px;
+      }
+    }
+   
+   .cardsDisplay {
+    width: 161px;
+    }
+ 
+  }
+}
+ 
+ 
+
 
 
  
