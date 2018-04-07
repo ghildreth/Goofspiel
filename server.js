@@ -166,19 +166,24 @@ for(var key in temp){
   winner = temp[key].winner;
 }
 
+// state.games[key].score1,
+// state.games[key].score2,
 
-knex('state').insert({
-  screen_name: 'rohit',
-  gameState: winner
-}).returning('id')
-.then((id)=>{
-  console.log("Record inserted into the database");
-   res.redirect(`/game/${gameId}`);
+if (game.over){
+  knex('state').insert({
+    // req.body.user_name
+    screen_name: 'rohit',
+    gameState: winner,
+  }).returning('id')
+  .then((id)=>{
+    console.log("Record inserted into the database");
+
+  });
+}
+
+
+res.redirect(`/game/${gameId}`);
 });
-
-
-
-})
 
 
 
