@@ -43,6 +43,7 @@ const state = {
 };
 
 const bots = ['Julius Ceasar', 'Mickey', 'Dave', 'Homer Simpson'];
+let randomNumber = Math.floor(Math.random()*bots.length);
 
 function drawCard(arrayOfCards) {
   var shuffledCards = shuffleCard(arrayOfCards);
@@ -117,6 +118,7 @@ app.post("/game/new", (req, res) => {
     score1: 0,
     score2: 0,
     username: req.body.username,
+    botname: bots[randomNumber],
   }
 
   res.redirect(`/game/${gameId}`);
@@ -138,7 +140,7 @@ app.post('/game/:gameId/play', (req, res) => {
   game.hand1 = game.hand1.filter(x=> x != card);
   game.bet1 = opponentBet;
   game.bet2 = card;
-  game.winner = "Human";
+  game.winner = game.username;
   if(!game.over){
     if(getValueOf(game.bet1) === getValueOf(game.bet2)) {
       // console.log(`Player 1 wins with ${getValueOf(game.valueCard)} with ${card} vs ${opponentBet}`);
@@ -154,7 +156,7 @@ app.post('/game/:gameId/play', (req, res) => {
     game.over = !game.valueCard;
   }
   if (game.score1 > game.score2) {
-      game.winner = "Bot";
+      game.winner = game.botname;
   }
 
   // stringify the objecty

@@ -10,7 +10,7 @@
 <body>
     <div class="cardContainer">
         <div class="player1Cards">
-        <p class="playerNames">Bot Dave: &#x1F916;</p>
+        <p class="playerNames">Bot <%= game.botname %> &#x1F916;</p>
             <% game.hand2.forEach(function(card) { %>
                 <span type="sumbit" name="card" value="<%= card %>">
                     <img class="cardsDisplay" src="/cards/backside.png" />
@@ -39,12 +39,12 @@
     </div>
 
      <div class="scoreBoard">
-        <p>Bot Score: <%= game.score1 %> </p>
-        <p>Human Score: <%= game.score2 %> </p>
+        <p><%= game.botname %>'s Score: <%= game.score1 %> </p>
+        <p><%= game.username %>'s Score: <%= game.score2 %> </p>
 
          <% if (game.over === true)  { %>
           <div><p><%= game.winner %> wins!</p>
-            <% if (game.winner === "Bot")  { %>
+            <% if (game.winner === game.botname)  { %>
             <iframe src="https://giphy.com/embed/9MFsKQ8A6HCN2" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hehehe-hehehehe-9MFsKQ8A6HCN2"></a></p>
             <% } else { %>
                 <iframe src="https://giphy.com/embed/l0HUnQR733uhm48UM" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ptm-l0HUnQR733uhm48UM"></a></p>
