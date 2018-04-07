@@ -153,7 +153,30 @@ app.post('/game/:gameId/play', (req, res) => {
   if (game.score1 > game.score2) {
       game.winner = "Bot";
   }
-  res.redirect(`/game/${gameId}`);
+
+  // stringify the objecty
+  // insert it into DB
+
+
+var temp = state.games;
+
+var winner;
+console.log("temp");
+for(var key in temp){
+  winner = temp[key].winner;
+}
+
+
+knex('state').insert({
+  screen_name: 'rohit',
+  gameState: winner
+}).returning('id')
+.then((id)=>{
+  console.log("Record inserted into the database");
+   res.redirect(`/game/${gameId}`);
+});
+
+
 
 })
 
