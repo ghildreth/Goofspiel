@@ -86,7 +86,6 @@ app.get("/", (req, res) => {
 });
 
 app.get('/games', (req, res) => {
-  // res.send(Object.keys(state.games)); // shows only unique game IDs
   res.send(state); // entire state of all possible games ever played
 });
 
@@ -98,7 +97,7 @@ app.get('/game/:gameId', (req, res) => {
     res.redirect('/');
     return;
   }
-  console.log("inside my app.get /game/:gameId:", game);
+
   res.render('game_new', { game, gameId });
 });
 
@@ -126,7 +125,6 @@ app.post("/game/new", (req, res) => {
 app.post('/game/:gameId/play', (req, res) => {
   const { gameId } = req.params;
   const { card } = req.body; // const card = req.body.card;
-  // console.log(`Is this nine_of_spades? ${req.body.card}`);
 
   const game = state.games[gameId];
 
@@ -137,9 +135,9 @@ app.post('/game/:gameId/play', (req, res) => {
 
   const opponentBet = drawCard(game.hand2); // reduces the Bots array of cards by 1 and gives one bet card
   game.hand1 = game.hand1.filter(x=> x != card);
-  game.bet1 = card;
-  game.bet2 = opponentBet;
-  console.log(`ValueCard: ${game.valueCard}`);
+  game.bet1 = opponentBet;
+  game.bet2 = card;
+  game.winner = "Human";
   if(!game.over){
     if(getValueOf(game.bet1) === getValueOf(game.bet2)) {
       // console.log(`Player 1 wins with ${getValueOf(game.valueCard)} with ${card} vs ${opponentBet}`);
@@ -153,9 +151,11 @@ app.post('/game/:gameId/play', (req, res) => {
     }
     game.valueCard = game.pile.pop();
     game.over = !game.valueCard;
-
   }
-    res.redirect(`/game/${gameId}`);
+  if (game.score1 > game.score2) {
+      game.winner = "Bot";
+  }
+  res.redirect(`/game/${gameId}`);
 
 })
 

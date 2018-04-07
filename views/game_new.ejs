@@ -4,32 +4,31 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Goofspiel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
     <!-- <script src="app.js"></script> -->
 </head>
 <body>
     <div class=cardContainer>
         <div class=player1Cards>
-        <p>Player 1:</p>
+        <p class="playerNames">Bot Dave: &#x1F916;</p>
             <% game.hand2.forEach(function(card) { %>
                 <span type="sumbit" name="card" value="<%= card %>">
                     <img class="cardsDisplay" src="/cards/<%= card %>.png" />
                 </span>
             <% }) %>
-        </div>
+        </div><br />
 
-        <div class=pileCards>
-                    <% game.pile.forEach(function(pileCard) { %>
+            <div class=pileCards>
                     <span>
-                        <input type="image" src="/cards/<%= pileCard %>.png" name="card" class="cardsDisplay" value="<%= pileCard %>">
+                        <p>The Prize &#x2B07;</p>
+                        <img class="cardsDisplay" src="/cards/<%= game.valueCard %>.png">
                     </span>
-                <% }) %>
             </div>
+
 
         <div class=player2Cards>
             <form method="POST" action="/game/<%= gameId %>/play">
-            <p>Player 2:</p>
+            <p class="playerNames">Human: &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
                 <% game.hand1.forEach(function(card) { %>
                 <span>
                     <input type="image" src="/cards/<%= card %>.png" name="card" class="cardsDisplay" value="<%= card %>">
@@ -39,27 +38,19 @@
         </div>
     </div>
 
-   <pre><%= JSON.stringify(game, null, 2) %></pre>
-
-     <div class="scoreBoard"><h6>Player 1 Score: <%= game.score1 %> </h6>
-     <h6>Player 2 Score: <%= game.score2 %> </h6>
+     <div class="scoreBoard">
+        <p>Bot Score: <%= game.score1 %> </p>
+        <p>Human Score: <%= game.score2 %> </p>
 
          <% if (game.over === true)  { %>
-            <% if (game.score1 > game.score2){ %>
-          <div><h6>player 1 wins</h6>
+          <div><p><%= game.winner %> wins!</p>
               <form method="post" action="/game/new">
                 <button type="submit">Play again?</button>
               </form>
             </div>
-            <% } else {%>
-         <div><h6>player 2 wins</h6>
-              <form method="post" action="/game/new">
-                <button type="submit">Play again?</button>
-              </form>
-         </div>
-            <% }%>
           <% }%>
       </div>
+
    <!-- <pre><%= JSON.stringify(game, null, 2) %></pre> -->
 
 
