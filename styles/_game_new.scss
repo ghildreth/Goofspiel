@@ -1,7 +1,7 @@
 body {
   .cardContainer {
     display: block;
- 
+
     .player1Cards span {
       width: 50px;
       overflow: visible;
@@ -31,7 +31,7 @@ body {
     div.player2Cards {
       position: relative;
     }
-  
+
     .player2Cards span {
       width: 50px;
       overflow: visible;
@@ -42,11 +42,11 @@ body {
         height: 242px;
       }
     }
-   
+
    .cardsDisplay {
     width: 161px;
     }
- 
+
   }
   .cardsDisplay {
     width: 161px;
@@ -70,8 +70,6 @@ body {
     overflow: visible;
     display: inline-block;
 }
-
-
 
 div.scoreBoard {
     position: absolute;
