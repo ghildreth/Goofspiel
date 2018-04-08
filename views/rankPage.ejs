@@ -30,13 +30,19 @@
     </ul>
 
     <div>
-        <h3>Highscores:</h3>
-        <ol>
-            <% highArray.forEach(function(score) { %>
-            <li><%= score %></li>
-        <% }) %>
-
-        </ol>
+        <h3>High Scores</h3>
+        <table>
+            <thead>
+                <tr><th>Name</th><th>Score</th></tr>
+            </thead>
+            <tbody>
+                <% games.forEach((game) => { %>
+                    <tr>
+                        <td><%= game.screenName %></td><td><%= game.gameState %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </div>
 
 </body>

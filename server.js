@@ -24,7 +24,7 @@ const usersRoutes = require("./routes/users");
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
-
+const dataHelpers = require('./data-helpers')(knex);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -115,33 +115,45 @@ app.get('/game/war/:gameId', (req, res) => {
   res.render('game_war', { game, gameId });
 });
 
-var highscores;
-let highArray = [];
+// let highscores;
+// let highArray = [];
+// let names;
+// let namesArray = [];
 
-knex('state').select(
-  'screen_name', 'gameState',
-).returning('gameState')
-.then((gameState)=> {
-// console.log(gameState);
+// knex('state').select(
+//    'gameState',
+// ).returning('gameState')
+// .then((gameState)=> {
 
-  gameState.forEach(function (x) {
-    highscores = x.gameState;
-    console.log(highscores);
-    highArray.push(highscores.split());
-    // highArray.push((highscores);
+//   gameState.forEach(function (x) {
+//     highscores = x.gameState;
+//     console.log(highscores);
+//     highArray.push(highscores.split());
+//   })
+//   console.log(highArray);
+// })
 
+// knex('state').select(
+//   'screen_name',
+// ).returning('screen_name')
+// .then((screen_name)=> {
 
-  })
-  console.log(highArray);
-})
+//   screen_name.forEach(function (x) {
+//     names = x.screen_name;
+//     console.log(names);
+//     namesArray.push(names.split());
+//   })
+//   console.log(namesArray);
+// })
 
 
 app.get('/rankPage', (req, res) => {
 
-//   console.log(highArray[0]);
-// var x = highArray[0];
-console.log(highArray);
-  res.render("rankPage",  { highArray } );
+  const gamesPrms = dataHelpers.getNamesAndScores();
+  gamesPrms
+    .then((games) => {
+      res.render("rankPage",  { games } );
+    });
 });
 
 
@@ -251,34 +263,16 @@ app.post('/game/:gameId/play', (req, res) => {
   if (game.score1 > game.score2) {
       game.winner = game.botname;
   }
+  if(game.over){
+    const savingWinnerPrms = dataHelpers.insertWinnerData(game.winner, Math.max(game.score1, game.score2));
+    savingWinnerPrms
+    .then(() => {
+      res.redirect(`/game/${gameId}`);
+    })
+  } else {
+    res.redirect(`/game/${gameId}`);
+  }
 
-var temp = state.games;
-
-var winner;
-var username;
-console.log("temp");
-for(var key in temp){
-  winner = temp[key].winner;
-  username = temp[key].username;
-}
-
-// state.games[key].score1,
-// state.games[key].score2,
-
-if (game.over){
-  knex('state').insert({
-    // req.body.user_name
-    screen_name: game.winner,
-    gameState:  temp[key].score1 > temp[key].score2 ? temp[key].score1 : temp[key].score2,
-  }).returning('id')
-  .then((id)=>{
-    console.log("Record inserted into the database");
-
-  });
-}
-
-
-res.redirect(`/game/${gameId}`);
 });
 
 
