@@ -102,6 +102,39 @@ app.get('/game/:gameId', (req, res) => {
   res.render('game_new', { game, gameId });
 });
 
+var highscores;
+
+knex('state').select(
+  'screen_name', 'gameState',
+).returning('gameState')
+.then((gameState)=> {
+// console.log(gameState);
+  gameState.forEach(function (x) {
+    highscores = x.gameState;
+    console.log(highscores);
+
+  })
+})
+
+app.get('/rankPage', (req, res) => {
+
+  res.render("rankPage", { highscores });
+});
+
+
+//   knex('state').insert({
+//     // req.body.user_name
+//     screen_name: game.winner,
+//     gameState:  temp[key].score1 > temp[key].score2 ? temp[key].score1 : temp[key].score2,
+//   }).returning('id')
+//   .then((id)=>{
+//     console.log("Record inserted into the database");
+
+//   });
+// }
+
+
+
 app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
 
