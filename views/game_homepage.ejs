@@ -18,25 +18,28 @@
 <header>
     <h1>Welcome to NOGames!</h1>
         <form method="get" action="/rankPage">
-         <button type="submit">Rankings</button>
+            <button type="submit">Rankings</button>
         </form>
 </header>
 <body>
-    <h2>What game do you want to play?</h2>
-    <ul class="gameTypes">
-        <li>Goofspiel
-            <form class="username"method="post" action="/game/new">
-                <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
-                <button class="start" type="submit">Start Game</button>
-            </form>
-        </li>
 
-        <li>War
+    <div class="gamesbox">
+        <h2>What game do you want to play?</h2>
+        <ul class="gameTypes">
+            <li>Goofspiel
+                <form class="username"method="post" action="/game/new">
+                    <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
+                    <button class="start" type="submit">Start Game</button>
+                </form>
+            </li>
+
+            <li>War
                 <form class="username"method="post" action="/game/war">
                     <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
                     <button class="start" type="submit">Start Game</button>
                 </form>
             </li>
+    </div>
 
 
 </body>
