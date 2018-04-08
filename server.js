@@ -25,6 +25,7 @@ const usersRoutes = require("./routes/users");
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 const dataHelpers = require('./data-helpers')(knex);
+const warDataHelpers = require('./war-data-helper')(knex);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -116,12 +117,28 @@ app.get('/game/war/:gameId', (req, res) => {
 
 app.get('/rankPage', (req, res) => {
 
+  const warGamesPrms = warDataHelpers.getNamesAndScores();
+  warGamesPrms
+    .then((warGames) => {
+      // res.render("rankPageWar", { warGames } );
+
   const gamesPrms = dataHelpers.getNamesAndScores();
   gamesPrms
     .then((games) => {
-      res.render("rankPage",  { games } );
+      res.render("rankPage",  { games, warGames } );
     });
+  });
 });
+
+// app.get('/rankPageWar', (req, res) => {
+
+//   const warGamesPrms = warDataHelpers.getNamesAndScores();
+//   warGamesPrms
+//     .then((warGames) => {
+//       res.render("rankPageWar", { warGames } );
+//     });
+// });
+
 
 app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
@@ -163,6 +180,7 @@ app.post("/game/war", (req, res) => {
     war1pile,
 
   }
+
   res.redirect(`/game/war/${gameId}`);
 });
 
@@ -193,7 +211,18 @@ app.post('/game/war/:gameId/', (req, res) => {
   }
   game.war1 = game.war1pile.pop();
   game.war2 = game.war2pile.pop();
-  res.redirect(`/game/war/${gameId}`);
+
+
+    if(!game.war1){
+    const warWinner = warDataHelpers.insertWinnerData(game.winner, Math.max(game.score1, game.score2));
+    warWinner
+    .then(() => {
+      res.redirect(`/game/war/${gameId}`);
+    })
+  } else {
+    res.redirect(`/game/war/${gameId}`);
+  }
+  // res.redirect(`/game/war/${gameId}`);
 });
 
 app.post('/game/:gameId/play', (req, res) => {
