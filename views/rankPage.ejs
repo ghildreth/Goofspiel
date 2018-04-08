@@ -19,31 +19,28 @@
     <h1>Highscores</h1>
 </header>
 <body>
-    <h2>Back to playing Goofspiel</h2>
-    <ul class="gameTypes">
-        <li>Goofspiel
-            <form method="get" action="/">
-                <button type="submit">back to homepage </button>
-            </form>
-        </li>
 
-    </ul>
-
-    <div>
-        <h3>High Scores</h3>
-        <table>
-            <thead>
-                <tr><th>Name</th><th>Score</th></tr>
-            </thead>
-            <tbody>
-                <% games.forEach((game) => { %>
-                    <tr>
-                        <td><%= game.screenName %></td><td><%= game.gameState %></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
+    <div class="rankbox">
+        <div>
+            <h2>High Scores</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+                    <% games.forEach((game) => { %>
+                        <tr>
+                            <td><%= game.screenName %></td><td><%= game.gameState %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <form method="get" action="/">
+        <button class="backhome" type="submit"> Go back home </button>
+    </form>
 
 </body>
 </html>
