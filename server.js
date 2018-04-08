@@ -79,7 +79,6 @@ function getValueOf(card) {
   }
 }
 
-
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
@@ -115,38 +114,6 @@ app.get('/game/war/:gameId', (req, res) => {
   res.render('game_war', { game, gameId });
 });
 
-// let highscores;
-// let highArray = [];
-// let names;
-// let namesArray = [];
-
-// knex('state').select(
-//    'gameState',
-// ).returning('gameState')
-// .then((gameState)=> {
-
-//   gameState.forEach(function (x) {
-//     highscores = x.gameState;
-//     console.log(highscores);
-//     highArray.push(highscores.split());
-//   })
-//   console.log(highArray);
-// })
-
-// knex('state').select(
-//   'screen_name',
-// ).returning('screen_name')
-// .then((screen_name)=> {
-
-//   screen_name.forEach(function (x) {
-//     names = x.screen_name;
-//     console.log(names);
-//     namesArray.push(names.split());
-//   })
-//   console.log(namesArray);
-// })
-
-
 app.get('/rankPage', (req, res) => {
 
   const gamesPrms = dataHelpers.getNamesAndScores();
@@ -155,7 +122,6 @@ app.get('/rankPage', (req, res) => {
       res.render("rankPage",  { games } );
     });
 });
-
 
 app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
@@ -274,8 +240,6 @@ app.post('/game/:gameId/play', (req, res) => {
   }
 
 });
-
-
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
