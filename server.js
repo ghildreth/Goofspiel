@@ -116,22 +116,32 @@ app.get('/game/war/:gameId', (req, res) => {
 });
 
 var highscores;
+let highArray = [];
 
 knex('state').select(
   'screen_name', 'gameState',
 ).returning('gameState')
 .then((gameState)=> {
 // console.log(gameState);
+
   gameState.forEach(function (x) {
     highscores = x.gameState;
     console.log(highscores);
+    highArray.push(highscores.split());
+    // highArray.push((highscores);
+
 
   })
+  console.log(highArray);
 })
+
 
 app.get('/rankPage', (req, res) => {
 
-  res.render("rankPage", { highscores });
+//   console.log(highArray[0]);
+// var x = highArray[0];
+console.log(highArray);
+  res.render("rankPage",  { highArray } );
 });
 
 
