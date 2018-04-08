@@ -8,35 +8,26 @@
     <!-- <script src="app.js"></script> -->
 </head>
 <body>
-    <% if (game.valueCard)  { %>
+    <% if (game.war1)  { %>
     <div class="cardContainer">
-        <div class="player1Cards">
-        <p class="playerNames">Bot <%= game.botname %> &#x1F916;</p>
-            <% game.hand2.forEach(function(card) { %>
-                <span type="sumbit" name="card" value="<%= card %>">
-                    <img class="cardsDisplay" src="/cards/backside.png" />
-                </span>
-            <% }) %>
-        </div><br />
 
-            <div class="pileCards">
+            <div class="warCard2">
                     <span>
-                        <p class="playerNames">The Prize</p>
-                        <p class="playerNames">&#x2B07;</p>
-                        <img class="cardsDisplay" src="/cards/<%= game.valueCard %>.png">
+
+                        <p class="playerNames"><%= game.botname %></p>
+                        <img class="cardsDisplay" src="/cards/<%= game.war1 %>.png">
                     </span>
             </div>
 
-        <div class="player2Cards">
-            <form method="POST" action="/game/<%= gameId %>/play">
-                <p class="playerNames"><%= game.username %> &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
-                    <% game.hand1.forEach(function(card) { %>
+            <div class="warCard1">
                     <span>
-                        <input type="image" src="/cards/<%= card %>.png" name="card" class="cardsDisplay" value="<%= card %>">
+                        <p class="playerNames"><%= game.username %></p>
+                        <img class="cardsDisplay" src="/cards/<%= game.war2 %>.png">
                     </span>
-                    <% }) %>
-            </form>
-        </div>
+            </div>
+            <form method="post" action="/game/war/<%= gameId %>">
+                <button type="submit"> &#x1F4A3; WAR! &#x1F4A5; </button>
+              </form>
     </div>
     <% }%>
 
@@ -44,7 +35,7 @@
         <p><%= game.botname %>'s Score: <%= game.score1 %> </p>
         <p><%= game.username %>'s Score: <%= game.score2 %> </p>
 
-         <% if (game.over === true)  { %>
+         <% if (!game.war1)  { %>
           <div><p><%= game.winner %> wins!</p>
             <% if (game.winner === game.botname)  { %>
             <iframe src="https://giphy.com/embed/9MFsKQ8A6HCN2" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hehehe-hehehehe-9MFsKQ8A6HCN2"></a></p>
@@ -52,7 +43,7 @@
                 <iframe src="https://giphy.com/embed/l0HUnQR733uhm48UM" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ptm-l0HUnQR733uhm48UM"></a></p>
                 <% }%>
               <form method="get" action="/">
-                <button type="submit">Play again?</button>
+                <button class="war-button" type="submit">Play again?</button>
               </form>
             </div>
           <% }%>

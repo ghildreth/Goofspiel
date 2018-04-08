@@ -8,6 +8,7 @@ margin: 0px;
     border: 1px solid black;
     box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.2);
     margin-bottom: 25px;
+    border-radius: 5px;
   }
 
   div.pileCards {
@@ -17,98 +18,6 @@ margin: 0px;
 .scoreBoard {
     border: 3px solid rgb(218, 221, 21);
     font-size: 2em;
+    margin-right: 20px;
+    margin-left: 20px;
 }
-
-.d-none {
-  visibility: hidden;
-}
-
-
-
-
-
-
-
-
-
-//   .cardContainer {
-//     display: block;
-
-//     .player1Cards span {
-//       width: 50px;
-//       overflow: visible;
-//       display: inline-block;
-
-//       .player1Cards {
-//         position: relative;
-//         height: 242px;
-//       }
-//     }
-
-//     div.pileCards {
-//       position: relative;
-//       height: 242px;
-//     }
-//     .pileCards span {
-//       position: absolute;
-//       top: 0px;
-//       left: 50px;
-
-//       .pileCards {
-//         position: relative;
-//         height: 242px;
-//       }
-//     }
-
-//     div.player2Cards {
-//       position: relative;
-//     }
-
-//     .player2Cards span {
-//       width: 50px;
-//       overflow: visible;
-//       display: inline-block;
-
-//       .player2Cards {
-//         position: relative;
-//         height: 242px;
-//       }
-//     }
-
-//    .cardsDisplay {
-//     width: 161px;
-//     }
-
-//   }
-//   .cardsDisplay {
-//     width: 161px;
-//   }
-
-
-// .player2Cards span {
-//     position: absolute;
-//     top: 0;
-//     left: 50px;
-// }
-
-// .player2Cards {
-//     position: relative;
-//     height: 242px;
-// }
-
-// .player1Cards span {
-//     width: 50px;
-//     overflow: visible;
-//     display: inline-block;
-// }
-
-// div.scoreBoard {
-//     position: absolute;
-//     top: 300;
-//     right: 100;
-//     width: 300;
-//     height: 300px;
-//     padding-left: 29px;
-//     border: 3px solid #73AD21;
-//     font-size: 3em;
-// }

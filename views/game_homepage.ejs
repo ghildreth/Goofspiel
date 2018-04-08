@@ -22,23 +22,20 @@
     <h2>What game do you want to play?</h2>
     <ul class="gameTypes">
         <li>Goofspiel
-            <form method="post" action="/game/new">
+            <form class="username"method="post" action="/game/new">
                 <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
-                <button type="submit">Start Game</button>
+                <button class="start" type="submit">Start Game</button>
             </form>
         </li>
 
-    </ul>
+        <li>War
+                <form class="username"method="post" action="/game/war">
+                    <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
+                    <button class="start" type="submit">Start Game</button>
+                </form>
+            </li>
 
-    <div>
-        <h3>Highscores:</h3>
-        <ol>
-            <li>Player 1</li>
-            <li>Player 2</li>
-            <li>Player 3</li>
-            <li>Player 4</li>
-        </ol>
-    </div>
+    </ul>
 
 </body>
 </html>

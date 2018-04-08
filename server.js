@@ -43,7 +43,9 @@ const state = {
 };
 
 const bots = ['Julius Ceasar', 'Mickey', 'Dave', 'Homer Simpson'];
-let randomNumber = Math.floor(Math.random()*bots.length);
+function getRandomBotNumber() {
+return Math.floor(Math.random()*bots.length);
+}
 
 function drawCard(arrayOfCards) {
   var shuffledCards = shuffleCard(arrayOfCards);
@@ -91,6 +93,7 @@ app.get('/games', (req, res) => {
 });
 
 app.get('/game/:gameId', (req, res) => {
+
   const gameId = req.params.gameId;
   const game = state.games[gameId];
 
@@ -98,8 +101,17 @@ app.get('/game/:gameId', (req, res) => {
     res.redirect('/');
     return;
   }
-
   res.render('game_new', { game, gameId });
+});
+
+app.get('/game/war/:gameId', (req, res) => {
+  const gameId = req.params.gameId;
+  const game = state.games[gameId];
+  if(!game) {
+    res.redirect('/');
+    return;
+  }
+  res.render('game_war', { game, gameId });
 });
 
 app.post("/game/new", (req, res) => {
@@ -107,9 +119,9 @@ app.post("/game/new", (req, res) => {
 
   const pile = shuffleCard(getSuitedCards('hearts'));
 
-  var valueCard = pile.pop();  // at this point PILE has only 12 cards left!!!
+  var valueCard = pile.pop();
   state.games[gameId] = {
-    hand1: getSuitedCards('spades'), // ['ace_of_spades', '', ....]
+    hand1: getSuitedCards('spades'), 
     hand2: getSuitedCards('diamonds'),
     pile,
     valueCard,
@@ -118,16 +130,66 @@ app.post("/game/new", (req, res) => {
     score1: 0,
     score2: 0,
     username: req.body.username,
-    botname: bots[randomNumber],
+    botname: bots[getRandomBotNumber()],
   }
 
   res.redirect(`/game/${gameId}`);
 });
 
+app.post("/game/war", (req, res) => {
+
+  
+  const gameId = new Date().getTime().toString(36) + "W"; 
+  let war1pile = shuffleCard(getSuitedCards('spades'));
+  let war2pile = shuffleCard(getSuitedCards('hearts'));
+
+  state.games[gameId] = {
+    score1: 0,
+    score2: 0,
+    username: req.body.username,
+    botname: bots[getRandomBotNumber()],
+    war1: war1pile.pop(),
+    war2: war2pile.pop(),
+    war2pile,
+    war1pile,
+
+  }
+  res.redirect(`/game/war/${gameId}`);
+});
+
+app.post('/game/war/:gameId/', (req, res) => {
+  const { gameId } = req.params;
+  const game = state.games[gameId];
+
+  if(!game) {
+    res.redirect('/');
+    return;
+  }
+
+  if(game.war1){
+    if(getValueOf(game.war1) === getValueOf(game.war2)) {
+      game.score1 += getValueOf(game.war1) / 2;
+      game.score2 += getValueOf(game.war2) / 2;
+    } else if (getValueOf(game.war1) > getValueOf(game.war2)){
+      game.score1 += getValueOf(game.war1);
+    } else if (getValueOf(game.war2) > getValueOf(game.war1)) {
+      game.score2 += getValueOf(game.war2);
+    }
+    game.over = !game.war1;
+  }
+  if (game.score1 > game.score2) {
+      game.winner = game.botname;
+  } else {
+    game.winner = game.username;
+  }
+  game.war1 = game.war1pile.pop();
+  game.war2 = game.war2pile.pop();
+  res.redirect(`/game/war/${gameId}`);
+});
 
 app.post('/game/:gameId/play', (req, res) => {
   const { gameId } = req.params;
-  const { card } = req.body; // const card = req.body.card;
+  const { card } = req.body;
 
   const game = state.games[gameId];
 
@@ -158,10 +220,6 @@ app.post('/game/:gameId/play', (req, res) => {
   if (game.score1 > game.score2) {
       game.winner = game.botname;
   }
-
-  // stringify the objecty
-  // insert it into DB
-
 
 var temp = state.games;
 
