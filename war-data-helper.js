@@ -2,6 +2,7 @@ function warDataHelperMaker(knex){
   function getNamesAndScores(){
     const queryPrms = knex('war')
       .select('screen_name', 'gameState')
+      .orderBy('gameState', 'desc')
 
     const formattedPrms = queryPrms
       .then((records) => {
