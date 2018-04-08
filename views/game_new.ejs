@@ -21,8 +21,8 @@
 
             <div class="pileCards">
                     <span>
-                        <p class="playerNames">The Prize</p>
-                        <p class="playerNames">&#x2B07;</p>
+                        <p class="playerNames">Prize</p>
+                        <p id="prizearrow">&#x2B07;</p>
                         <img class="cardsDisplay" src="/cards/<%= game.valueCard %>.png">
                     </span>
             </div>
@@ -47,9 +47,9 @@
          <% if (game.over === true)  { %>
           <div><p><%= game.winner %> wins!</p>
             <% if (game.winner === game.botname)  { %>
-            <iframe src="https://giphy.com/embed/9MFsKQ8A6HCN2" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hehehe-hehehehe-9MFsKQ8A6HCN2"></a></p>
+            <iframe src="https://giphy.com/embed/9MFsKQ8A6HCN2" frameBorder="0" class="giphy-embed"></iframe>
             <% } else { %>
-                <iframe src="https://giphy.com/embed/l0HUnQR733uhm48UM" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ptm-l0HUnQR733uhm48UM"></a></p>
+                <iframe src="https://giphy.com/embed/l0HUnQR733uhm48UM" frameBorder="0" class="giphy-embed"></iframe>
                 <% }%>
               <form method="get" action="/">
                 <button type="submit">Play again?</button>

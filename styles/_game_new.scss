@@ -1,6 +1,6 @@
 .playerNames {
 font-size: 2em;
-margin: 0px;
+margin: 10px 0px 0px 0px;
 }
 
 div.cardContainer {
@@ -11,6 +11,11 @@ div.cardContainer {
   border: 2px solid darkgoldenrod;
   border-radius: 10px;
   opacity: 0.9;
+
+  p#prizeArrow {
+  margin: 0;
+  font-size: 1.2em;
+  }
 }
 
 .cardsDisplay {
@@ -21,10 +26,6 @@ div.cardContainer {
     border-radius: 5px;
     margin-right: -15px;
     margin-left: -15px;
-  }
-
-  div.pileCards {
-    margin-bottom: 20px;
   }
 
 .scoreBoard {
