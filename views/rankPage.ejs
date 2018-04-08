@@ -32,11 +32,10 @@
     <div>
         <h3>Highscores:</h3>
         <ol>
+            <% highArray.forEach(function(score) { %>
+            <li><%= score %></li>
+        <% }) %>
 
-            <li><%= highscores %></li>
-            <li>Player 2</li>
-            <li>Player 3</li>
-            <li>Player 4</li>
         </ol>
     </div>
 
