@@ -104,6 +104,7 @@ app.get('/game/:gameId', (req, res) => {
   res.render('game_new', { game, gameId });
 });
 
+
 app.get('/game/war/:gameId', (req, res) => {
   const gameId = req.params.gameId;
   const game = state.games[gameId];
@@ -114,6 +115,26 @@ app.get('/game/war/:gameId', (req, res) => {
   res.render('game_war', { game, gameId });
 });
 
+var highscores;
+
+knex('state').select(
+  'screen_name', 'gameState',
+).returning('gameState')
+.then((gameState)=> {
+// console.log(gameState);
+  gameState.forEach(function (x) {
+    highscores = x.gameState;
+    console.log(highscores);
+
+  })
+})
+
+app.get('/rankPage', (req, res) => {
+
+  res.render("rankPage", { highscores });
+});
+
+
 app.post("/game/new", (req, res) => {
   const gameId = new Date().getTime().toString(36);
 
@@ -121,7 +142,7 @@ app.post("/game/new", (req, res) => {
 
   var valueCard = pile.pop();
   state.games[gameId] = {
-    hand1: getSuitedCards('spades'), 
+    hand1: getSuitedCards('spades'),
     hand2: getSuitedCards('diamonds'),
     pile,
     valueCard,
@@ -138,8 +159,8 @@ app.post("/game/new", (req, res) => {
 
 app.post("/game/war", (req, res) => {
 
-  
-  const gameId = new Date().getTime().toString(36) + "W"; 
+
+  const gameId = new Date().getTime().toString(36) + "W";
   let war1pile = shuffleCard(getSuitedCards('spades'));
   let war2pile = shuffleCard(getSuitedCards('hearts'));
 

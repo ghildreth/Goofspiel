@@ -16,28 +16,29 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 <header>
-    <h1>Welcome to NOGames!</h1>
-        <form method="get" action="/rankPage">
-         <button type="submit">Rankings</button>
-        </form>
+    <h1>Welcome to our Database </h1>
 </header>
 <body>
-    <h2>What game do you want to play?</h2>
+    <h2>Back to playing Goofspeil</h2>
     <ul class="gameTypes">
         <li>Goofspiel
-            <form class="username"method="post" action="/game/new">
-                <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
-                <button class="start" type="submit">Start Game</button>
+            <form method="get" action="/">
+                <button type="submit">back to homepage </button>
             </form>
         </li>
 
-        <li>War
-                <form class="username"method="post" action="/game/war">
-                    <input class="username" type="username "name="username" placeholder="What's your name?"></textarea>
-                    <button class="start" type="submit">Start Game</button>
-                </form>
-            </li>
+    </ul>
 
+    <div>
+        <h3>Highscores:</h3>
+        <ol>
+
+            <li><%= highscores %></li>
+            <li>Player 2</li>
+            <li>Player 3</li>
+            <li>Player 4</li>
+        </ol>
+    </div>
 
 </body>
 </html>
