@@ -43,7 +43,7 @@ const state = {
   }
 };
 
-const bots = ['Julius Ceasar', 'Mickey', 'Dave', 'Homer Simpson'];
+const bots = ['Don', 'Joel', 'Rosy', 'Roy', 'Jeremy', 'Billiam', 'Vasili'];
 function getRandomBotNumber() {
 return Math.floor(Math.random()*bots.length);
 }

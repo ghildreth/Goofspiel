@@ -24,12 +24,13 @@
         <h3>High Scores</h3>
         <table>
             <thead>
-                <tr><th>Name</th><th>Score</th></tr>
+                <h4>Goofspiel</h4>
+              <!--   <tr><th>Name</th><th>Score</th></tr> -->
             </thead>
             <tbody>
                 <% games.forEach((game) => { %>
                     <tr>
-                        <td><%= game.screenName %></td><td><%= game.gameState %></td>
+                        <td><%= game.screenName %>:</td><td><%= game.gameState %></td>
                     </tr>
                 <% }); %>
             </tbody>
@@ -37,12 +38,13 @@
 
                 <table>
             <thead>
-                <tr><th>Name</th><th>Score</th></tr>
+                <h4>War</h4>
+             <!--    <tr><th>Name</th><th>Score</th></tr> -->
             </thead>
             <tbody>
                 <% warGames.forEach((war) => { %>
                     <tr>
-                        <td><%= war.screenName %></td><td><%= war.gameState %></td>
+                        <td><%= war.screenName %>:</td><td><%= war.gameState %></td>
                     </tr>
                 <% }); %>
             </tbody>

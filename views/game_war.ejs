@@ -14,14 +14,14 @@
             <div class="warCard2">
                     <span>
 
-                        <p class="playerNames"><%= game.botname %></p>
+                        <p class="playerNames"> Bot <%= game.botname %> &#x1F916;</p>
                         <img class="cardsDisplay" src="/cards/<%= game.war1 %>.png">
                     </span>
             </div>
 
             <div class="warCard1">
                     <span>
-                        <p class="playerNames"><%= game.username %></p>
+                        <p class="playerNames"><%= game.username %> &#x1F937;&#x200D;&#x2642;&#xFE0F;</p>
                         <img class="cardsDisplay" src="/cards/<%= game.war2 %>.png">
                     </span>
             </div>
@@ -38,9 +38,9 @@
          <% if (!game.war1)  { %>
           <div><p><%= game.winner %> wins!</p>
             <% if (game.winner === game.botname)  { %>
-            <iframe src="https://giphy.com/embed/9MFsKQ8A6HCN2" frameBorder="0" class="giphy-embed"></iframe>
+            <iframe src="https://giphy.com/embed/sRMPFaVQLGSw8" frameBorder="0" class="giphy-embed"></iframe>
             <% } else { %>
-                <iframe src="https://giphy.com/embed/l0HUnQR733uhm48UM" frameBorder="0" class="giphy-embed"></iframe>
+                <iframe src="https://giphy.com/embed/nqi89GMgyT3va" frameBorder="0" class="giphy-embed"></iframe>
                 <% }%>
               <form method="get" action="/">
                 <button class="playAgain-button" type="submit">Play again?</button>
