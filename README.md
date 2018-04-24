@@ -1,14 +1,16 @@
-# Node Skeleton
+# MidTerm Project: CARD GAME
+Game name: Goofspiel
+We created a fully functional verison of Goofspiel wherein a user faces a computer in an intense 13 round match. Whoever bids the higher card wins the prize card in the middle.
+
+Game name: War
+This is a super casual game wherein the user and computer are dealt random cards whoever has the higher wins that card's points.
 
 ## Project Setup
 
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+## Screen shots
+![screenshot from 2018-04-20 00-52-52](https://user-images.githubusercontent.com/34799149/39037594-cc159dc2-4435-11e8-9955-50cc0932a134.png)
+![screenshot from 2018-04-20 00-53-27](https://user-images.githubusercontent.com/34799149/39037639-f05966fa-4435-11e8-89c2-b7c1efc0ab46.png)
+
 
 ## Getting Started
 
